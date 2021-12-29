@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: jwt-auth-demo-db
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: jwt-auth-demo
+      PGDATA: /var/lib/postgresql/data/db-files/
+    volumes:
+      - type: volume
+        source: jwt-auth-demo-db-volume
+        target: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+volumes:
+  jwt-auth-demo-db-volume:
+    name: jwt-auth-demo-db
