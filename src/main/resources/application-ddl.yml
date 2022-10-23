@@ -1,0 +1,15 @@
+spring:
+  flyway:
+    enabled: false
+  jpa:
+    properties:
+      javax:
+        persistence:
+          schema-generation:
+            create-source: metadata
+            scripts.action: create
+            scripts.create-target: create.sql
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+    generate-ddl: true

@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   db:
@@ -20,6 +20,13 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
+
+  mailcatcher:
+    container_name: mailcatcher
+    image: schickling/mailcatcher
+    ports:
+      - "1025:1025" # SMTP server
+      - "1080:1080" # HTTP server
 
 volumes:
   spring-boot-blueprint-db-volume:

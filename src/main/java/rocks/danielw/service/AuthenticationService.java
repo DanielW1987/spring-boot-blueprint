@@ -17,6 +17,7 @@ import rocks.danielw.web.api.SignInRequest;
 import rocks.danielw.web.api.SignInResponse;
 import rocks.danielw.web.api.SignUpRequest;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,6 +32,7 @@ public class AuthenticationService {
   private final PasswordEncoder passwordEncoder;
   private final JwtUtils jwtUtils;
 
+  @Transactional
   public SignInResponse signIn(SignInRequest request) {
     UserDetails userDetails = userService.loadUserByUsername(request.getEmail());
     checkCredentials(request.getEmail(), request.getPassword());
@@ -46,6 +48,7 @@ public class AuthenticationService {
         .build();
   }
 
+  @Transactional
   public void registerUser(SignUpRequest request) {
     checkIfUserAlreadyExists(request.getEmail());
 

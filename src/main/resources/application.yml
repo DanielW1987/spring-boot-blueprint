@@ -1,4 +1,29 @@
 spring:
+  application:
+    name: Spring Boot Blueprint # TODO: change it
+  lifecycle:
+    timeout-per-shutdown-phase: 60s
+  task:
+    scheduling:
+      shutdown:
+        await-termination: true
+        await-termination-period: PT1M
+    execution:
+      shutdown:
+        await-termination: true
+        await-termination-period: PT1M
+  main:
+    banner-mode: off
+  mail:
+    host: localhost
+    port: 1025
+    username: ${SMTP_USERNAME:#{null}}
+    password: ${SMTP_PASSWORD:#{null}}
+    default-encoding: UTF-8
+    test-connection: false
+    properties:
+      from-email: no-reply@change-it.com # TODO: change it
+      from-name: Spring Boot Blueprint # TODO: change it
   datasource:
     username: ${DATASOURCE_USERNAME}
     password: ${DATASOURCE_PASSWORD}
@@ -6,6 +31,13 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 5
+      max-lifetime: 600000
+      connection-test-query: SELECT 1
+  flyway:
+    clean-on-validation-error: true
+    enabled: true
+    baseline-on-migrate: true
+    sql-migration-prefix: v
   jpa:
     properties:
       hibernate:
@@ -16,14 +48,44 @@ spring:
     show-sql: false # Set true for debugging
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update # (create, create-drop, validate, update)
+      ddl-auto: validate # (create, create-drop, validate, update)
     open-in-view: false
   sql:
     init:
       platform: postgres
       mode: always
 
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: never
+    include-exception: false
+  tomcat:
+    accesslog:
+      enabled: true
+  shutdown: graceful
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: 0.0.1 # TODO: the version may come from somewhere else and should not be set statically here
+    urls:
+      frontend: http://localhost:3000
+
 security:
   jwt:
     secret: ${JWT_SECRET}
     expiration-in-ms: ${JWT_EXPIRATION_IN_MS}
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health, info, metrics, env, prometheus, flyway
+  info:
+    env:
+      enabled: true
+    build:
+      enabled: true

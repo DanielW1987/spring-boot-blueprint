@@ -13,7 +13,7 @@ To set up the project please apply the following steps:
 2. Define the data source connection details in file `application.yml`:
     - `spring.datasource.username` (you have to use user `postgres`)
     - `spring.datasource.password` (password must match `POSTGRES_PASSWORD` of service `db` from `docker-compose.yml` file)
-    - `spring.datasource.url` (`jdbc:postgresql://localhost:5432/jwt-auth-demo`, database name must match `POSTGRES_DB` of service `db` from `docker-compose.yml` file)
+    - `spring.datasource.url` (`jdbc:postgresql://localhost:5432/spring-boot-blueprint`, database name must match `POSTGRES_DB` of service `db` from `docker-compose.yml` file)
 3. Define the JWT settings in file `application.yml`:
     - `security.jwt.secret`: Secret to sign JWT tokens
     - `security.jwt.expiration-in-ms`: Expiration time in ms for JWT access token

@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import rocks.danielw.persistence.user.UserRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
@@ -14,6 +16,7 @@ public class UserService implements UserDetailsService {
   private final UserRepository userRepository;
   
   @Override
+  @Transactional
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
     return userRepository.findByEmail(email)
         .orElseThrow(() -> new UsernameNotFoundException(
