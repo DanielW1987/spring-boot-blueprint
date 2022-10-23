@@ -1,16 +1,16 @@
-version: '3.7'
+version: '3.8'
 
 services:
   db:
-    container_name: jwt-auth-demo-db
-    image: postgres:14.1-alpine
+    container_name: spring-boot-blueprint-db
+    image: postgres:15.0-alpine3.16
     environment:
       POSTGRES_PASSWORD: secret
-      POSTGRES_DB: jwt-auth-demo
+      POSTGRES_DB: spring-boot-blueprint
       PGDATA: /var/lib/postgresql/data/db-files/
     volumes:
       - type: volume
-        source: jwt-auth-demo-db-volume
+        source: spring-boot-blueprint-db-volume
         target: /var/lib/postgresql/data
     ports:
       - "5432:5432"
@@ -22,5 +22,5 @@ services:
         window: 120s
 
 volumes:
-  jwt-auth-demo-db-volume:
-    name: jwt-auth-demo-db
+  spring-boot-blueprint-db-volume:
+    name: spring-boot-blueprint-db

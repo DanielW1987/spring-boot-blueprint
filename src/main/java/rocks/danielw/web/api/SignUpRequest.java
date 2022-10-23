@@ -4,19 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.List;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
-public class LoginResponse {
-  
+public class SignUpRequest {
+
   private String email;
-  private List<String> roles;
-  private String token;
+  private String password;
   
 }

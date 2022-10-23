@@ -1,12 +1,13 @@
 {
 	"info": {
-		"_postman_id": "5199bfea-74ae-47d0-b2fa-4e23740b0b88",
-		"name": "Jwt User Authentication Demo",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "0c01d764-d3a2-4dc5-b08f-4d99046ce5c6",
+		"name": "Spring Boot Blueprint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4050988"
 	},
 	"item": [
 		{
-			"name": "Register user",
+			"name": "Sign up",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -20,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/auth/signup",
+					"raw": "http://localhost:8080/api/v1/auth/sign-up",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -30,20 +31,20 @@
 						"api",
 						"v1",
 						"auth",
-						"signup"
+						"sign-up"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Signin User",
+			"name": "Sign in",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"test\"\n}",
+					"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"test\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,7 +52,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/auth/login",
+					"raw": "http://localhost:8080/api/v1/auth/sign-in",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -61,7 +62,7 @@
 						"api",
 						"v1",
 						"auth",
-						"login"
+						"sign-in"
 					]
 				}
 			},
@@ -144,6 +145,36 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNjY2NTI5NTMzLCJleHAiOjE2NjY2MTU5MzN9.NyVAhLtHmIlnjHRetwBh6G3-KpAEnwOQiw6rnWsfwTjcUw8RxRx7oHOpjitapopdnUdbqT75ALvz7_8EZo8A0g",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

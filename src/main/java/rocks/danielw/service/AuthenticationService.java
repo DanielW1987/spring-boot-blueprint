@@ -13,9 +13,9 @@ import rocks.danielw.persistence.user.UserEntity;
 import rocks.danielw.persistence.user.UserRepository;
 import rocks.danielw.persistence.user.UserRole;
 import rocks.danielw.security.JwtUtils;
-import rocks.danielw.web.api.LoginRequest;
-import rocks.danielw.web.api.LoginResponse;
-import rocks.danielw.web.api.SignupRequest;
+import rocks.danielw.web.api.SignInRequest;
+import rocks.danielw.web.api.SignInResponse;
+import rocks.danielw.web.api.SignUpRequest;
 
 import java.util.List;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class AuthenticationService {
   private final PasswordEncoder passwordEncoder;
   private final JwtUtils jwtUtils;
 
-  public LoginResponse authenticateUser(LoginRequest request) {
+  public SignInResponse signIn(SignInRequest request) {
     UserDetails userDetails = userService.loadUserByUsername(request.getEmail());
     checkCredentials(request.getEmail(), request.getPassword());
     String token = jwtUtils.generateJwtToken(userDetails);
@@ -39,14 +39,14 @@ public class AuthenticationService {
         .map(GrantedAuthority::getAuthority)
         .collect(Collectors.toList());
 
-    return LoginResponse.builder()
+    return SignInResponse.builder()
         .email(userDetails.getUsername())
         .roles(roles)
         .token(token)
         .build();
   }
 
-  public void registerUser(SignupRequest request) {
+  public void registerUser(SignUpRequest request) {
     checkIfUserAlreadyExists(request.getEmail());
 
     UserEntity user = new UserEntity(

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rocks.danielw.service.AuthenticationService;
-import rocks.danielw.web.api.LoginRequest;
-import rocks.danielw.web.api.LoginResponse;
-import rocks.danielw.web.api.SignupRequest;
+import rocks.danielw.web.api.SignInRequest;
+import rocks.danielw.web.api.SignInResponse;
+import rocks.danielw.web.api.SignUpRequest;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -18,14 +18,14 @@ public class AuthenticationRestController {
   
   private final AuthenticationService authenticationService;
   
-  @PostMapping("/login")
-  public ResponseEntity<LoginResponse> authenticateUser(@RequestBody LoginRequest request) {
-    LoginResponse response = authenticationService.authenticateUser(request);
+  @PostMapping("/sign-in")
+  public ResponseEntity<SignInResponse> signIn(@RequestBody SignInRequest request) {
+    SignInResponse response = authenticationService.signIn(request);
     return ResponseEntity.ok(response);
   }
 
-  @PostMapping("/signup")
-  public ResponseEntity<?> registerUser(@RequestBody SignupRequest request) {
+  @PostMapping("/sign-up")
+  public ResponseEntity<?> signUp(@RequestBody SignUpRequest request) {
     authenticationService.registerUser(request);
     return ResponseEntity.ok().build();
   }
