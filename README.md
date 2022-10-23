@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository contains a simple spring boot project with jwt authentication flow enabled. To demonstrate registration and login behaviour it also contains a simple vue frontend app and a postman collection.
+This repository contains a simple spring boot project with jwt authentication flow enabled. To demonstrate registration and login behaviour it also contains a postman collection.
 
 ## Backend
 
@@ -27,16 +27,6 @@ There are two example users with the following credentials:
 | admin@example.com   | test      |
 | user@example.com    | test      |
 
-## Frontend
-
-```shell
-cd frontend
-npm install
-npm start
-```
-
-Go to `http://localhost:3000`.
-
 ## Postman
 
-Import the [attached Postman Collection](postman/Jwt User Authentication Demo.postman_collection.json) to test via Postman.
+Import the [attached Postman Collection](postman/spring-boot-blueprint.postman_collection.json) to test via Postman.
