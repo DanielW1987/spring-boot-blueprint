@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 import static org.springframework.http.HttpStatus.UNSUPPORTED_MEDIA_TYPE;
 
@@ -78,6 +80,11 @@ public class RestExceptionsHandler {
   public ResponseEntity<ErrorResponse> handleValidationException(Exception exception) {
     log.warn(exception.getMessage(), exception);
     return new ResponseEntity<>(createErrorResponse(exception), UNPROCESSABLE_ENTITY);
+  }
+
+  @ExceptionHandler({BadCredentialsException.class})
+  public  ResponseEntity<ErrorResponse> handleBadCredentialsException(Exception exception) {
+    return new ResponseEntity<>(createErrorResponse(exception), UNAUTHORIZED);
   }
 
   @ExceptionHandler({UsernameNotFoundException.class, AccessDeniedException.class})
